@@ -11,8 +11,7 @@ from .data_prep import load_data, clean_and_impute, create_binary_target
 from .features import encode_categorical_features, engineer_risk_features, prepare_feature_matrix
 
 # Modeling
-from .model import train_xgboost_model, generate_risk_scores, explain_asset_risk_shap
-
+from .model import train_xgboost_model, generate_risk_scores
 __all__ = [
     "load_data", 
     "clean_and_impute", 
@@ -21,6 +20,6 @@ __all__ = [
     "engineer_risk_features",
     "prepare_feature_matrix",
     "train_xgboost_model",
-    "generate_risk_scores",
-    "explain_asset_risk_shap"
+    "generate_risk_scores"
+
 ]
