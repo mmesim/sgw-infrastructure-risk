@@ -62,6 +62,7 @@ The pipeline is modularized under `src/` and executed via Jupyter notebooks:
 3. **Binary Target Mapping:** Maps asset health states (`'Normal'` $\rightarrow$ `0`, `'Faulty'`/`'Overheated'` $\rightarrow$ `1`) into a new binary target column (`is_critical`).
 4. **Export:** Outputs the cleaned dataset to `data/processed_faults.csv` for Step 2 feature engineering.
 
+---
 
 ### 📂 Pipeline Execution: Step 2 (Feature Engineering & Risk Input Matrix)
 
@@ -73,4 +74,19 @@ The pipeline is modularized under `src/` and executed via Jupyter notebooks:
 1. **Categorical Encoding:** One-hot encodes categorical stress factors (e.g., `Weather Condition`, `Maintenance Status`) using Pandas dummy variables for XGBoost compatibility.
 2. **Interaction Feature Engineering:** Derives physical stress interaction proxies (e.g., electrical stress via `Voltage * Power Load`, environmental stress via `Wind Speed * Age`) to capture compounding infrastructure hazards.
 3. **Feature Matrix Splitting:** Prepares the final training matrices by isolating target labels (`is_critical`) and stripping non-feature IDs and raw strings into clean $X$ and $y$ arrays for model training.
+
+
+---
+
+### 📂 Pipeline Execution: Step 3 (XGBoost Model Training & Risk Scoring)
+The pipeline is modularized under `src/` and executed via Jupyter notebooks:
+- **Notebook:** `notebooks/03_model_training.ipynb`
+- **Library:** `src/model.py`
+
+**Operations Performed:**
+1. **Train-Test Splitting:** Splits the feature matrix into stratified training and testing subsets (`80/20` ratio).
+2. **Post-Split Feature Scaling:** Normalizes numerical features using `StandardScaler` fitted **exclusively on the training subset** to prevent data leakage.
+3. **XGBoost Classification & Evaluation:** Trains an `XGBoost` classifier (`XGBClassifier`) and evaluates performance using ROC-AUC scores, classification reports, and confusion matrix metrics.
+4. **Dynamic Risk Scoring:** Converts model failure probabilities ($0.0 - 1.0$) into actionable continuous $0–100$ asset risk scores for prioritization.
+---
 
