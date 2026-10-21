@@ -89,3 +89,12 @@ The pipeline is modularized under `src/` and executed via Jupyter notebooks:
 4. **Dynamic Risk Scoring:** Converts model failure probabilities ($0.0 - 1.0$) into actionable continuous $0–100$ asset risk scores for prioritization.
 ---
 
+### 📂 Pipeline Execution: Step 4 (Decision Framework & Operational Dashboard)
+The decision support and geospatial visualization layer is executed via Jupyter notebooks:
+- **Notebook:** `notebooks/04_decision_framework.ipynb`
+
+**Operations Performed:**
+1. **Risk Threshold Categorization:** Maps continuous $0\text{--}100\%$ risk scores into operational tiers (🟢 GREEN: 0–39%, 🟡 AMBER: 40–74%, 🔴 RED: 75–100%) with explicit action protocols.
+2. **Model Explainability (SHAP):** Decomposes asset risk predictions into feature-level contributions to provide operators transparent reasoning.
+3. **Control Room Dashboard:** Renders interactive summary metrics, high-risk counts, and score distribution histograms.
+4. **Geospatial Risk Map:** Displays an interactive Folium map plotting assets with traffic-light color-coded markers and rich popup metadata.
