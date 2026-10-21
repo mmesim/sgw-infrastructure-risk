@@ -10,6 +10,27 @@
 
 ---
 
+### 📊 Dataset Source & Full Column Preview
+The raw input dataset used for this project is sourced from Kaggle:
+🔗 **[Power System Faults Dataset](https://www.kaggle.com/datasets/ziya07/power-system-faults-dataset)**
+
+**Full Dataset Schema (All 13 Columns):**
+1. `Fault ID`: Unique identifier for each recorded asset event.
+2. `Fault Type`: Categorical classification of the failure event (e.g., *Line Breakage, Transformer Failure, Overheating*).
+3. `Fault Location (Latitude, Longitude)`: Geospatial coordinates of the impacted asset.
+4. `Voltage (V)`: Electrical voltage telemetry reading.
+5. `Current (A)`: Electrical current telemetry reading.
+6. `Power Load (MW)`: Active power load carried by the asset.
+7. `Temperature (°C)`: Operational thermal measurement.
+8. `Wind Speed (km/h)`: Environmental weather stress indicator.
+9. `Weather Condition`: Meteorological state (*Clear, Rainy, Snowy, Windstorm, Thunderstorm*).
+10. `Maintenance Status`: Service tracking log (*Scheduled, Pending, Completed*).
+11. `Component Health`: Asset operational status (*Normal, Faulty, Overheated*).
+12. `Duration of Fault (hrs)`: Total active duration of the fault condition.
+13. `Down time (hrs)`: Total asset downtime resulting from the incident.
+
+---
+
 ### ⚡ Quick Start & Setup
 
 ```bash
@@ -40,3 +61,16 @@ The pipeline is modularized under `src/` and executed via Jupyter notebooks:
 2. **Missing Value Imputation:** Fills numerical missing values with the column **median** and categorical features with the **mode**.
 3. **Binary Target Mapping:** Maps asset health states (`'Normal'` $\rightarrow$ `0`, `'Faulty'`/`'Overheated'` $\rightarrow$ `1`) into a new binary target column (`is_critical`).
 4. **Export:** Outputs the cleaned dataset to `data/processed_faults.csv` for Step 2 feature engineering.
+
+
+### 📂 Pipeline Execution: Step 2 (Feature Engineering & Risk Input Matrix)
+
+The pipeline is modularized under `src/` and executed via Jupyter notebooks:
+- **Notebook:** `notebooks/02_feature_engineering.ipynb`
+- **Library:** `src/features.py`
+
+**Operations Performed:**
+1. **Categorical Encoding:** One-hot encodes categorical stress factors (e.g., `Weather Condition`, `Maintenance Status`) using Pandas dummy variables for XGBoost compatibility.
+2. **Interaction Feature Engineering:** Derives physical stress interaction proxies (e.g., electrical stress via `Voltage * Power Load`, environmental stress via `Wind Speed * Age`) to capture compounding infrastructure hazards.
+3. **Feature Matrix Splitting:** Prepares the final training matrices by isolating target labels (`is_critical`) and stripping non-feature IDs and raw strings into clean $X$ and $y$ arrays for model training.
+
