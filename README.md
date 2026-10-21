@@ -34,7 +34,7 @@ The raw input dataset used for this project is sourced from Kaggle:
 
 ```bash
 # 1. Clone the repository and navigate inside
-git clone [https://github.com/mmesim/sgw-infrastructure-risk.git](https://github.com/mmesim/sgw-infrastructure-risk.git)
+git clone https://github.com/mmesim/sgw-infrastructure-risk.git
 cd sgw-infrastructure-risk
 
 # 2. Initialize environment
