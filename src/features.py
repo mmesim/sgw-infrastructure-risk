@@ -24,14 +24,8 @@ def encode_categorical_features(df: pd.DataFrame, cat_cols: list) -> pd.DataFram
 def engineer_risk_features(df: pd.DataFrame) -> pd.DataFrame:
     """Creates domain-specific interaction features for utility infrastructure risk."""
     df_out = df.copy()
-    
     # Example domain interactions if columns exist
-    if 'Voltage' in df_out.columns and 'Power Load' in df_out.columns:
-        df_out['voltage_load_interaction'] = df_out['Voltage'] * df_out['Power Load']
-        
-    if 'Wind Speed' in df_out.columns and 'Age' in df_out.columns:
-        df_out['environmental_stress_index'] = df_out['Wind Speed'] * df_out['Age']
-        
+    df_out['voltage_load_interaction'] = df_out['Voltage (V)'] * df_out['Power Load (MW)']        
     return df_out
 
 
