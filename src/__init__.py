@@ -6,3 +6,15 @@ __version__ = "0.0.1"
 
 #Data Preparation
 from .data_prep import load_data, clean_and_impute, create_binary_target
+
+#Feature Engineering
+from .features import encode_categorical_features, engineer_risk_features, prepare_feature_matrix
+
+__all__ = [
+    "load_data", 
+    "clean_and_impute", 
+    "create_binary_target",
+    "encode_categorical_features",
+    "engineer_risk_features",
+    "prepare_feature_matrix"
+]
