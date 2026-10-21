@@ -20,5 +20,5 @@ conda activate sgw_env
 # 2. Install core C/C++ dependencies via Conda
 conda install -c conda-forge llvmlite numba -y
 
-# 3. Install Python dependencies & execute pipeline
+# 3. Install Python dependencies 
 pip install -r requirements.txt
